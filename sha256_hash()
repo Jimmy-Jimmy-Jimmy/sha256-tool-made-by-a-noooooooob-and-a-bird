@@ -1,0 +1,30 @@
+import tkinter as tk
+from tkinter import ttk
+import hashlib
+
+def sha256_hash():
+    user_input = input_field.get()
+    sha256_hashed = hashlib.sha256(user_input.encode()).hexdigest()
+    result.set(sha256_hashed)
+
+    with open("user_history_file.txt", "a") as f:
+        f.write(f"{user_input}: {sha256_hashed}\n")
+
+# Set up the Tkinter window
+root = tk.Tk()
+root.title("SHA256 Hasher")
+
+frame = ttk.Frame(root, padding="10")
+frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+
+# Create an input field
+input_field = ttk.Entry(frame, width=40)
+input_field.grid(row=0, column=0, pady=5)
+
+# Create a button labeled 'SHA256_HASH###'
+hash_button = ttk.Button(frame, text="SHA256_HASH###", command=sha256_hash)
+hash_button.grid(row=1, column=0, pady=5)
+
+# Create a label to display the result
+result = tk.StringVar()
+result_label = ttk.Label
